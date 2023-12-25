@@ -10,6 +10,7 @@ class PageHome(View):
         return render(request, self.template_home)
 
     def post(self, request):  # отправка данных на сервер
-        print(request.POST)
+        print(request.POST['number'])
+        print(request.POST['email'])
         return HttpResponse('Ваш запрос принят')
 
