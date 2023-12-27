@@ -43,7 +43,7 @@ class PageHome(View):
             ).update(
                 name = user_name
             )
-        elif method == "update_age":  # если находит по почте, то меняем почту
+        elif method == "update_age":  # если находит по почте, то меняем возраст
             user_age = request.POST['age']
             FormUser.objects.filter(
                 email = user_email
@@ -51,7 +51,6 @@ class PageHome(View):
                 age = user_age
             )
         
-
 
         # проверка пользователя на наличие первый способ
         #data = FormUser.objects.filter(
