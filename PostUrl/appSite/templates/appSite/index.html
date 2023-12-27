@@ -9,7 +9,7 @@
    
     <form action="{% url 'urlPageHome' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="email" placeholder="email"> 
+        <input type="text" name="email" placeholder="email" required> 
         <input type="number" name="number" placeholder="number">
         <button>Отправить</button>
     </form>
