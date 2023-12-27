@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import FormUser
 
 
+
 class PageHome(View):
     template_home = 'appSite/index.html'
 
@@ -24,7 +25,21 @@ class PageHome(View):
 
         user_name = request.POST['last_name']  # получаем из пост запроса данные (имена находятся в html файла)
         user_email = request.POST['email']  # получаем из пост запроса данные (имена находятся в html файла)
-        user_age = request.POST['age']  # получаем из пост запроса данные (имена находятся в html файла)
+        method = request.POST['method']
+
+        if method == 'create':  # определяем какой метод (метод из html) - обновить или перезаписать
+            user_age = request.POST['age']  # получаем из пост запроса данные (имена находятся в html файла)
+            try:
+                FormUser.objects.create(  # создание объекта в бд
+                    name = user_name,  # Берётся из models переменная и ей присваивается значение переменной выше
+                    email = user_email, # Берётся из models переменная и ей присваивается значение переменной выше
+                    age = user_age # Берётся из models переменная и ей присваивается значение переменной выше
+                ) 
+            except:
+                pass 
+        elif method == "update":
+            pass
+
 
         # проверка пользователя на наличие первый способ
         #data = FormUser.objects.filter(
@@ -33,11 +48,16 @@ class PageHome(View):
         #) # если пользователь уже есть - он будет найден 
         #print(data) # вывод в консоль - найден, либо нет
 
+        #----------------------------------------------------
+
         #if not data:  # если пользователь не найден, то создаётся объект
-        FormUser.objects.create(  # создание объекта в бд
-            name = user_name,  # Берётся из models переменная и ей присваивается значение переменной выше
-            email = user_email, # Берётся из models переменная и ей присваивается значение переменной выше
-            age = user_age # Берётся из models переменная и ей присваивается значение переменной выше
-        )  
+        # try:
+        #     FormUser.objects.create(  # создание объекта в бд
+        #         name = user_name,  # Берётся из models переменная и ей присваивается значение переменной выше
+        #         email = user_email, # Берётся из models переменная и ей присваивается значение переменной выше
+        #         age = user_age # Берётся из models переменная и ей присваивается значение переменной выше
+        #     ) 
+        # except:
+        #     pass 
         return redirect('urlPageHome') # после создания объекта возвращаемся на страницу - urlPageHome
 
