@@ -37,8 +37,20 @@ class PageHome(View):
                 ) 
             except:
                 pass 
-        elif method == "update":
-            pass
+        elif method == "update_name":  # если находит по почте, то меняем имя
+            FormUser.objects.filter(
+                email = user_email
+            ).update(
+                name = user_name
+            )
+        elif method == "update_age":  # если находит по почте, то меняем почту
+            user_age = request.POST['age']
+            FormUser.objects.filter(
+                email = user_email
+            ).update(
+                age = user_age
+            )
+        
 
 
         # проверка пользователя на наличие первый способ

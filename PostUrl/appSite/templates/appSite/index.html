@@ -19,9 +19,19 @@
     <!-- Форма для изменения -->
     <form action="{% url 'urlPageHome' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="method" value="create" update>
-        <input type="text" name="last_name" placeholder="Изменить" required> 
+        <input type="text" name="method" value="update_name" hidden>
+        <input type="text" name="last_name" placeholder="Изменить имя" required> 
         <input type="email" name="email" placeholder="Найти почту" required>
+        <button>Обновить инфо</button>
+    </form>
+
+    <!-- Форма для изменения -->
+    <form action="{% url 'urlPageHome' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="method" value="update_age" hidden>
+        <input type="number" name="age" placeholder="Изменить возраст" required> 
+        <input type="email" name="email" placeholder="Найти почту" required>
+        <input type="text" name="last_name" placeholder="Имя" required> 
         <button>Обновить инфо</button>
     </form>
     
