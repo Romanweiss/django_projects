@@ -11,7 +11,8 @@ class FormUser(models.Model):
 
     email = models.EmailField(
         verbose_name = 'Электронная почта',
-        null = False
+        null = False,
+        unique = True # проверка на полуя уникальность 
     )
 
     age = models.IntegerField(
