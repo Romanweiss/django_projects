@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
+from .models import FormUser
 
 
 class PageHome(View):
@@ -13,10 +14,22 @@ class PageHome(View):
         # else:
         #     request.session['hist'] = 'ok'
         #     return HttpResponse('сессии нет')
+
         return render(request, self.template_home)
 
     def post(self, request):  # отправка данных на сервер
-        print(request.POST['number'])
-        print(request.POST['email'])
-        return HttpResponse('Ваш запрос принят')
+        # print(request.POST['number'])
+        # print(request.POST['email'])
+        # return HttpResponse('Ваш запрос принят')
+
+        user_name = request.POST['last_name']  # получаем из пост запроса данные (имена находятся в html файла)
+        user_email = request.POST['email']  # получаем из пост запроса данные (имена находятся в html файла)
+        user_age = request.POST['age']  # получаем из пост запроса данные (имена находятся в html файла)
+
+        FormUser.objects.create(  # создание объекта в бд
+            name = user_name,  # Берётся из models переменная и ей присваивается значение переменной выше
+            email = user_email, # Берётся из models переменная и ей присваивается значение переменной выше
+            age = user_age # Берётся из models переменная и ей присваивается значение переменной выше
+        )  
+        return redirect('urlPageHome') # после создания объекта возвращаемся на страницу - urlPageHome
 
